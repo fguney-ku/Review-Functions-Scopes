@@ -251,6 +251,33 @@ print(b())
 ## Example 9 ##
 print('\n## Example 9 ##\n')
 
+def create_adder1(x):
+  tic = x
+
+  def adder():
+    nonlocal tic
+    tic = tic + x
+    return tic
+
+  return adder
+
+a1 = create_adder1(1)
+b1 = create_adder1(2)
+
+print(a1())
+print(a1())
+print(a1())
+print(a1())
+print(b1())
+print(a1())
+print(b1())
+print(b1())
+print(b1())
+
+
+## Example 10 ##
+print('\n## Example 9 ##\n')
+
 def quadruple(x):
 
   def double(x):
@@ -261,7 +288,7 @@ def quadruple(x):
 quadruple(2)
 
 
-## Example 10 ##
+## Example 11 ##
 print('\n## Example 10 ##\n')
 
 def quadruple(x):
