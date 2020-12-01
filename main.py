@@ -219,3 +219,56 @@ def outer():
 outer()
 print('a is', a, 'with len', len(a))
 
+
+## Example 8 ##
+print('\n## Example 8 ##\n')
+
+def create_adder(x): 
+  global tic 
+  tic = x
+
+  def adder():
+    global tic
+    tic = tic + x
+    return tic
+
+  return adder 
+ 
+a = create_adder(1)
+b = create_adder(2)
+
+print(a())
+print(a())
+print(a())
+print(a())
+print(b())
+print(a())
+print(b())
+print(b())
+print(b())
+
+
+## Example 9 ##
+print('\n## Example 9 ##\n')
+
+def quadruple(x):
+
+  def double(x):
+    return x+x
+
+  print(double(double(x)))
+
+quadruple(2)
+
+
+## Example 10 ##
+print('\n## Example 10 ##\n')
+
+def quadruple(x):
+
+  def double(y):
+    return y+y
+
+  print(double(double(x)))
+
+quadruple(2)
