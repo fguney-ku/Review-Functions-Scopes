@@ -1,3 +1,4 @@
+
 ## Example 0 ##
 print('\n## Example 0 ##\n')
 
@@ -177,6 +178,26 @@ outer()
 
 #####
 
+a_var = 'global'
+
+def outer():
+  a_var = 'enclosed'
+  print('outer before:', a_var)
+
+  def inner():
+    # access a variable from the outer (enclosed) scope
+    nonlocal a_var
+    # modify the enclosed variable
+    a_var = 'local'
+    print('in inner():', a_var)
+
+  inner()
+  print("outer after:", a_var)
+
+outer()
+
+#####
+
 # NOT recommended but let's define our own len() function
 def len(in_var):
   print('my len() function')
@@ -206,14 +227,15 @@ def outer():
       l += 1
     return l
   
-  a = 'local'
+  a = 'enclosed'
 
-  def inner(a):
+  def inner():
     global len
+    nonlocal a
     a += ' variable'
     print('a is', a, 'with len', len(a))
 
-  inner(a)
+  inner()
   print('a is', a, 'with len', len(a))
 
 outer()
@@ -299,3 +321,28 @@ def quadruple(x):
   print(double(double(x)))
 
 quadruple(2)
+
+
+## Example 12 ##
+print('\n## Example 12 ##\n')
+
+def make_counter(n):
+  c = n
+
+  def adder():
+    nonlocal c
+    c += 1
+    return c
+
+  return adder
+
+# can you figure out why these counters run independently?
+ca = make_counter(0)
+cb = make_counter(0)
+
+print(ca())
+print(ca())
+print(ca())
+print(cb())
+print(cb())
+print(ca())
